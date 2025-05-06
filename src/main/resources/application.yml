@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: demo
+
+aws:
+  credentials:
+    accessKey: XXXX
+    secretKey: XXXX
+
+  bucket:
+    name: XXXX
+
+server:
+  port: 8081
