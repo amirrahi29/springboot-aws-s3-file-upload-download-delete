@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.response.ResultResponse;
 import com.example.demo.service.S3Service;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,8 +15,12 @@ public class S3Controller {
     @Autowired
     private S3Service s3Service;
 
-    @PostMapping("/uploadFile")
-    public ResultResponse upload(@RequestParam("file") MultipartFile file) {
+    @CrossOrigin(origins = "*")
+    @PostMapping(value = "/uploadFile", consumes = "multipart/form-data")
+    @Operation(summary = "Upload a file to S3")
+    public ResultResponse uploadFile(
+            @Parameter(description = "File to upload")
+            @RequestPart("file") MultipartFile file) {
         return s3Service.upload(file);
     }
 
